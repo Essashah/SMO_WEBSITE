@@ -5,6 +5,7 @@ import HowStatement from './components/HowStatement'
 import SectionThree from './components/SectionThree'
 import SectionFour from './components/SectionFour'
 import SectionFive from './components/SectionFive'
+import UserJourney from './components/UserJourney'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <SectionThree />
       <SectionFour />
       <SectionFive />
+      <UserJourney />
       <Footer />
     </div>
   )
