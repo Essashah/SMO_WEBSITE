@@ -47,9 +47,9 @@ const SectionFour = () => {
   return (
     <section ref={sectionRef} className="relative w-full bg-black py-20 sm:py-24 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 sm:mb-12">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-400">Trusted by clubs worldwide</h3>
-          <p className="mt-2 text-sm sm:text-base text-white/70">From grassroots to elite organizations</p>
+        <div className="text-center mb-8 sm:mb-10">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Trusted by academies, semi-pro and pro clubs</h3>
+          <p className="mt-2 text-sm sm:text-base text-white/70">Neon categories: <span className="text-cyan-300">Men’s</span> · <span className="text-pink-300">Women’s</span> · <span className="text-blue-400">Youth</span></p>
         </div>
         <div
           ref={gridRef}

@@ -16,3 +16,80 @@ body {
 #root {
   min-height: 100vh;
 }
+
+/* Fonts helpers for easy usage */
+.font-orbitron {
+  font-family: 'Orbitron', system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+}
+.font-rajdhani {
+  font-family: 'Rajdhani', system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+}
+.font-inter {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* Subtle hero zoom animation */
+@keyframes heroZoomSlow {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.15); }
+}
+.hero-zoom {
+  animation: heroZoomSlow 22s ease-out forwards;
+  will-change: transform;
+}
+
+/* Subtle flicker for HUD elements */
+@keyframes hudFlicker {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.7; }
+}
+.hud-flicker {
+  animation: hudFlicker 2.2s ease-in-out infinite;
+}
+
+/* Gentle scan line shimmer */
+@keyframes scanLines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+.scan-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 255, 0.05) 0px,
+    rgba(0, 255, 255, 0.05) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  background-size: 100% 8px;
+  animation: scanLines 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Neon glow utility */
+.neon-blue {
+  text-shadow: 0 0 6px rgba(0, 242, 255, 0.9), 0 0 18px rgba(0, 242, 255, 0.6);
+}
+.neon-pink {
+  text-shadow: 0 0 6px rgba(255, 0, 128, 0.9), 0 0 18px rgba(255, 0, 128, 0.5);
+}
+
+/* Crosshair lines */
+.crosshair:before,
+.crosshair:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 255, 255, 0.35);
+}
+.crosshair:before {
+  width: 140px;
+  height: 1px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+.crosshair:after {
+  width: 1px;
+  height: 140px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
