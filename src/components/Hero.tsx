@@ -15,23 +15,44 @@ const Hero = () => {
         {videoError ? (
           <div className="h-full w-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900" />
         ) : (
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            onError={handleVideoError}
-            className="h-full w-full object-cover"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-            }}
-          >
-            <source src="/assets/videos/WhatsApp Video 2025-10-30 at 12.03.55.mp4" type="video/mp4" />
-          </video>
+          <>
+            {/* Mobile video */}
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              onError={handleVideoError}
+              className="block h-full w-full object-cover md:hidden"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+            >
+              <source src="/assets/videos/mobile_view.mp4" type="video/mp4" />
+            </video>
+
+            {/* Desktop/Laptop video */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              onError={handleVideoError}
+              className="hidden h-full w-full object-cover md:block"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+            >
+              <source src="/assets/videos/hero.mp4" type="video/mp4" />
+            </video>
+          </>
         )}
       </div>
     </section>
