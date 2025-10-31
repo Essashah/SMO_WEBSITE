@@ -35,7 +35,7 @@ const SectionFive = () => {
             '180+ clubs across tiers',
             '35+ countries reached',
             '20+ players signed to pro clubs',
-          ].map((text, idx) => (
+          ].map((text) => (
             <div key={text} className="flex items-start gap-3">
               <div className="mt-1 h-3 w-3 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)] animate-pulse" />
               <p className="text-white/90 text-base sm:text-lg">{text}</p>
