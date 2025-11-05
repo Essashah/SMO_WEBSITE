@@ -1,114 +1,45 @@
-import { useRef, useEffect, useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { ComposableMap, Geographies, Geography, Graticule, Sphere, ZoomableGroup, Marker } from 'react-simple-maps'
 
-const SCROLL_STEPS = [
+const MAP_LOCATIONS = [
   {
     location: 'London',
-    center: [-0.1276, 51.5072] as [number, number],
-    zoom: 2.8,
-    popupText: '35+ clubs',
     coordinates: [-0.1276, 51.5072] as [number, number],
+    popupText: '35+ clubs',
+    description: 'Premier League and Championship clubs',
   },
   {
     location: 'Brazil',
-    center: [-51, -15] as [number, number],
-    zoom: 2.4,
-    popupText: '20+ players scouted',
     coordinates: [-51, -15] as [number, number],
+    popupText: '20+ players scouted',
+    description: 'Top talent from South America',
   },
 ]
 
 const SectionFive = () => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const [zoom, setZoom] = useState(0.95)
-  const [center, setCenter] = useState<[number, number]>([10, 10])
-  const [activeStep, setActiveStep] = useState<number | null>(null)
+  const [activePopup, setActivePopup] = useState<number | null>(null)
   const popupRefs = useRef<(HTMLDivElement | null)[]>([])
 
-  // Scroll-triggered steps with zoom and popup animations
+  // Close popup when clicking outside
   useEffect(() => {
-    if (!sectionRef.current) return
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (!target.closest('.map-marker') && !target.closest('.map-popup')) {
+        setActivePopup(null)
+      }
+    }
 
-    const stepElements = Array.from(sectionRef.current.querySelectorAll('[data-map-step]')) as HTMLElement[]
-    if (stepElements.length === 0) return
-
-    const observers: IntersectionObserver[] = []
-
-    stepElements.forEach((el, idx) => {
-      if (idx >= SCROLL_STEPS.length) return
-
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const targetStep = SCROLL_STEPS[idx]
-              const startZoom = zoom
-              const startCenter = center
-              let startTs: number | null = null
-              let raf = 0
-
-              const animate = (ts: number) => {
-                if (startTs === null) startTs = ts
-                const elapsed = ts - startTs
-                const duration = 1200
-                const tRaw = Math.min(1, elapsed / duration)
-                const t = tRaw < 0.5 ? 4 * tRaw * tRaw * tRaw : 1 - Math.pow(-2 * tRaw + 2, 3) / 2
-
-                setZoom(startZoom + (targetStep.zoom - startZoom) * t)
-                setCenter([
-                  startCenter[0] + (targetStep.center[0] - startCenter[0]) * t,
-                  startCenter[1] + (targetStep.center[1] - startCenter[1]) * t,
-                ])
-
-                // Show popup when animation is 70% complete
-                if (t > 0.7 && activeStep !== idx) {
-                  setActiveStep(idx)
-                  const popup = popupRefs.current[idx]
-                  if (popup) {
-                    popup.style.opacity = '0'
-                    popup.style.transform = 'scale(0.8) translateY(10px)'
-                    setTimeout(() => {
-                      popup.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out'
-                      popup.style.opacity = '1'
-                      popup.style.transform = 'scale(1) translateY(0)'
-                    }, 50)
-                  }
-                }
-
-                if (t < 1) {
-                  raf = requestAnimationFrame(animate)
-                }
-              }
-
-              raf = requestAnimationFrame(animate)
-            } else {
-              // Hide popup when leaving step
-              if (activeStep === idx) {
-                setActiveStep(null)
-                const popup = popupRefs.current[idx]
-                if (popup) {
-                  popup.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out'
-                  popup.style.opacity = '0'
-                  popup.style.transform = 'scale(0.8) translateY(10px)'
-                }
-              }
-            }
-          })
-        },
-        { threshold: 0.6 }
-      )
-
-      io.observe(el)
-      observers.push(io)
-    })
+    if (activePopup !== null) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
 
     return () => {
-      observers.forEach((o) => o.disconnect())
+      document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [center, zoom, activeStep])
+  }, [activePopup])
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-black py-24 sm:py-28 lg:py-32 overflow-hidden">
+    <section className="relative w-full bg-black py-24 sm:py-28 lg:py-32">
       {/* Blue -> Purple gradient backdrop */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -118,96 +49,154 @@ const SectionFive = () => {
         }}
       />
 
-      <div className="w-full px-0 relative z-10">
+      <div className="relative z-10 mx-auto w-[92%] max-w-7xl">
         <div className="text-center mb-10 sm:mb-12">
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">Global footprint</h3>
           <p className="mt-2 text-sm sm:text-base text-white/70">Clubs and athletes we support around the world</p>
         </div>
 
-        <div className="relative w-full">
-          <div className="w-full">
-            <div className="w-full h-[55vh] sm:h-[60vh] md:h-[70vh] xl:h-[80vh]">
-              <ComposableMap projectionConfig={{ scale: 160 }} style={{ width: '100%', height: '100%' }}>
-                <Sphere fill="rgba(147,51,234,0.06)" stroke="#ffffff" strokeOpacity={0.25} strokeWidth={0.35} />
-                {/* Neon thin white graticules */}
-                <Graticule stroke="#ffffff" strokeOpacity={0.18} strokeWidth={0.25} />
-                <ZoomableGroup zoom={zoom} center={center}>
-                  <Geographies geography={'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'}>
-                    {({ geographies }: { geographies: any[] }) =>
-                      geographies.map((geo: any) => (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          style={{
-                            default: {
-                              fill: 'rgba(88,28,135,0.35)',
-                              stroke: 'rgba(255,255,255,0.35)',
-                              outline: 'none',
-                            },
-                            hover: {
-                              fill: 'rgba(147,51,234,0.5)',
-                              stroke: 'rgba(255,255,255,0.55)',
-                              outline: 'none',
-                            },
-                            pressed: {
-                              fill: 'rgba(126,34,206,0.65)',
-                              outline: 'none',
-                            },
-                          }}
-                          tabIndex={-1}
-                        />
-                      ))
-                    }
-                  </Geographies>
+        {/* Map container */}
+        <div className="relative w-full rounded-2xl overflow-hidden border-2 border-purple-400/30 bg-black/20 backdrop-blur-sm"
+          style={{ 
+            height: '70vh',
+            minHeight: '500px',
+            maxHeight: '800px',
+          }}
+        >
+          <div className="w-full h-full">
+            <ComposableMap 
+              projectionConfig={{ scale: 160 }} 
+              style={{ width: '100%', height: '100%' }}
+            >
+              <Sphere 
+                fill="rgba(147,51,234,0.06)" 
+                stroke="#ffffff" 
+                strokeOpacity={0.25} 
+                strokeWidth={0.35} 
+              />
+              <Graticule stroke="#ffffff" strokeOpacity={0.18} strokeWidth={0.25} />
+              <ZoomableGroup zoom={1.2} center={[0, 20]}>
+                <Geographies 
+                  geography={'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'}
+                >
+                  {({ geographies }: { geographies: any[] }) =>
+                    geographies.map((geo: any) => (
+                      <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        style={{
+                          default: {
+                            fill: 'rgba(88,28,135,0.35)',
+                            stroke: 'rgba(255,255,255,0.35)',
+                            outline: 'none',
+                          },
+                          hover: {
+                            fill: 'rgba(147,51,234,0.5)',
+                            stroke: 'rgba(255,255,255,0.55)',
+                            outline: 'none',
+                          },
+                          pressed: {
+                            fill: 'rgba(126,34,206,0.65)',
+                            outline: 'none',
+                          },
+                        }}
+                        tabIndex={-1}
+                      />
+                    ))
+                  }
+                </Geographies>
 
-                  {/* Glowing target markers for scroll steps */}
-                  {SCROLL_STEPS.map((step, idx) => (
-                    <Marker key={step.location} coordinates={step.coordinates}>
-                      <g transform="translate(-6,-6)">
-                        <circle r={6} className="text-purple-400 opacity-20" fill="currentColor" />
-                        <circle
-                          r={6}
-                          className={`animate-ping text-purple-400 ${activeStep === idx ? 'opacity-100' : 'opacity-0'}`}
-                          fill="currentColor"
+                {/* Blue neon dots - clickable markers */}
+                {MAP_LOCATIONS.map((location, idx) => (
+                  <Marker key={location.location} coordinates={location.coordinates}>
+                    <g 
+                      className="map-marker cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setActivePopup(activePopup === idx ? null : idx)
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {/* Outer glow */}
+                      <circle 
+                        r={12} 
+                        fill="rgba(34,211,238,0.2)" 
+                        className={activePopup === idx ? 'animate-pulse' : ''}
+                      />
+                      {/* Middle ring */}
+                      <circle 
+                        r={8} 
+                        fill="rgba(34,211,238,0.4)" 
+                        className={activePopup === idx ? 'animate-pulse' : ''}
+                      />
+                      {/* Inner dot */}
+                      <circle 
+                        r={5} 
+                        fill="rgba(34,211,238,1)"
+                        style={{ 
+                          filter: 'drop-shadow(0 0 8px rgba(34,211,238,0.8)) drop-shadow(0 0 16px rgba(34,211,238,0.6))',
+                        }}
+                      />
+                      {/* Pulsing effect when active */}
+                      {activePopup === idx && (
+                        <circle 
+                          r={8}
+                          fill="rgba(34,211,238,0.3)"
+                          className="animate-ping"
                         />
-                        <circle r={3} className="text-purple-300" fill="currentColor" />
-                      </g>
-                    </Marker>
-                  ))}
-                </ZoomableGroup>
-              </ComposableMap>
-            </div>
+                      )}
+                    </g>
+                  </Marker>
+                ))}
+              </ZoomableGroup>
+            </ComposableMap>
+          </div>
 
-            {/* Popup overlays */}
-            {SCROLL_STEPS.map((step, idx) => (
+          {/* Popup overlays - positioned above markers */}
+          {MAP_LOCATIONS.map((location, idx) => {
+            // Calculate popup position based on marker coordinates
+            // This is a simplified approach - in production you might want to use a more sophisticated method
+            const isActive = activePopup === idx
+            
+            return (
               <div
                 key={`popup-${idx}`}
                 ref={(el) => {
                   popupRefs.current[idx] = el
                 }}
-                className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 pointer-events-none"
+                className={`map-popup absolute z-30 pointer-events-none transition-all duration-300 ease-out ${
+                  isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`}
                 style={{
-                  opacity: activeStep === idx ? 1 : 0,
-                  transform: activeStep === idx ? 'translate(-50%, -50%) scale(1)' : 'translate(-50%, -50%) scale(0.8)',
-                  transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
+                  left: idx === 0 ? '35%' : '60%',
+                  top: idx === 0 ? '25%' : '45%',
+                  transform: isActive 
+                    ? 'translate(-50%, -100%) translateY(-15px)' 
+                    : 'translate(-50%, -100%) translateY(-10px)',
                 }}
               >
-                <div className="mx-auto w-full max-w-md text-center">
-                  <div className="inline-block bg-black/80 backdrop-blur-md border border-purple-400/60 rounded-xl px-6 py-4 sm:px-8 sm:py-5 shadow-[0_0_35px_rgba(147,51,234,0.4)]">
-                    <p className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-300 leading-relaxed">
-                      {step.popupText}
+                <div className="bg-black/95 backdrop-blur-xl border-2 border-cyan-400/70 rounded-xl px-6 py-4 sm:px-8 sm:py-5 shadow-[0_0_40px_rgba(34,211,238,0.6),inset_0_0_20px_rgba(34,211,238,0.1)] min-w-[200px]">
+                  <div className="text-center">
+                    <h4 className="text-lg sm:text-xl font-bold text-cyan-300 mb-2">
+                      {location.location}
+                    </h4>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-300 mb-1">
+                      {location.popupText}
+                    </p>
+                    <p className="text-sm text-white/70 mt-1">
+                      {location.description}
                     </p>
                   </div>
+                  {/* Arrow pointing down */}
+                  <div 
+                    className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-cyan-400/70"
+                    style={{ filter: 'drop-shadow(0 4px 8px rgba(34,211,238,0.3))' }}
+                  />
                 </div>
               </div>
-            ))}
-          </div>
+            )
+          })}
         </div>
-
-        {/* Scroll trigger elements */}
-        {SCROLL_STEPS.map((_, idx) => (
-          <div key={`trigger-${idx}`} data-map-step className="h-screen" />
-        ))}
       </div>
     </section>
   )
