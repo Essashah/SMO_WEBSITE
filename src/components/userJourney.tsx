@@ -45,7 +45,7 @@ const Card: React.FC<{
 
 const UserJourney: React.FC = () => {
   return (
-    <section className="relative w-full bg-black py-20 sm:py-24">
+    <section id="choose-your-path" className="relative w-full bg-black py-20 sm:py-24">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(60% 50% at 50% 0%, rgba(59,130,246,0.12), rgba(59,130,246,0)), radial-gradient(70% 60% at 50% 100%, rgba(147,51,234,0.14), rgba(147,51,234,0))' }} />
 
       <div className="relative z-10 mx-auto w-[92%] max-w-7xl">

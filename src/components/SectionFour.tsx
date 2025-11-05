@@ -13,10 +13,10 @@ const SectionFour = () => {
       '/assets/images/CSM_Pascani.png',
       '/assets/images/FC_Dynamo_Kyiv_logo.png',
       '/assets/images/Gulf United Fc - UAE.png',
-      '/assets/images/Hashtag Fc.webp',
+      '/assets/images/Hashtag_Fc.png',
       '/assets/images/Lusitano-F.C-(Portugal).png',
       '/assets/images/Nortwood Fc.png',
-      '/assets/images/PFC Lokomotiv Plovdiv u13 & u17 -Bulgaria.png',
+      '/assets/images/PFC_Lokomotiv_Plovdiv_u13___u17_-Bulgaria.png',
       '/assets/images/Pfc Ludogorets Razgrad u17 -Bulgaria.png',
       '/assets/images/Real Madrid Femenino (ladies)-Spain.png',
       '/assets/images/SG Sacavenense.png',
@@ -63,30 +63,41 @@ const SectionFour = () => {
               ?.replace(/[-_]/g, ' ')
             return (
               <div key={src} className="group relative">
-                {/* Glow background */}
+                {/* Glow background - pink by default, blue on hover */}
+                <div
+                  className="absolute inset-0 rounded-xl opacity-100 group-hover:opacity-0 transition-opacity duration-300"
+                  style={{
+                    background:
+                      'radial-gradient(120px 120px at center, rgba(236,72,153,0.25), rgba(236,72,153,0.0))',
+                    filter: 'blur(8px)',
+                  }}
+                />
                 <div
                   className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
                     background:
-                      'radial-gradient(120px 120px at center, rgba(0,240,255,0.18), rgba(0,240,255,0.0))',
+                      'radial-gradient(120px 120px at center, rgba(34,211,238,0.25), rgba(34,211,238,0.0))',
                     filter: 'blur(8px)',
                   }}
                 />
 
                 {/* Card */}
                 <div
-                  className="relative aspect-square rounded-xl border bg-white/5 backdrop-blur-sm flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:translate-y-[-2px]"
-                  style={{
-                    borderColor: 'rgba(0,240,255,0.35)',
-                    boxShadow: '0 0 18px rgba(0,240,255,0.12)',
-                  }}
+                  className="relative aspect-square rounded-xl border-2 bg-gradient-to-br from-pink-500/20 to-fuchsia-500/20 group-hover:from-cyan-400/20 group-hover:to-cyan-500/20 backdrop-blur-sm flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:translate-y-[-2px] border-pink-400 group-hover:border-cyan-400 shadow-[0_0_20px_rgba(236,72,153,0.5),0_0_40px_rgba(236,72,153,0.3),inset_0_0_15px_rgba(236,72,153,0.1)] group-hover:shadow-[0_0_20px_rgba(34,211,238,0.6),0_0_40px_rgba(34,211,238,0.4),inset_0_0_15px_rgba(34,211,238,0.15)]"
                 >
-                  {/* Subtle grid pattern */}
+                  {/* Subtle grid pattern - pink by default */}
                   <div
-                    className="absolute inset-0 opacity-[0.05] pointer-events-none"
+                    className="absolute inset-0 opacity-[0.08] group-hover:opacity-0 pointer-events-none transition-opacity duration-300"
                     style={{
                       backgroundImage:
-                        'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,240,255,0.6) 2px, rgba(0,240,255,0.6) 4px)',
+                        'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(236,72,153,0.6) 2px, rgba(236,72,153,0.6) 4px)',
+                    }}
+                  />
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-[0.08] pointer-events-none transition-opacity duration-300"
+                    style={{
+                      backgroundImage:
+                        'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34,211,238,0.6) 2px, rgba(34,211,238,0.6) 4px)',
                     }}
                   />
 
@@ -101,7 +112,7 @@ const SectionFour = () => {
 
                 {/* Label */}
                 <div className="mt-2 text-center">
-                  <span className="text-xs sm:text-sm text-white/80 group-hover:text-cyan-300 transition-colors duration-300 line-clamp-2">
+                  <span className="text-xs sm:text-sm text-pink-300 group-hover:text-cyan-300 transition-colors duration-300 line-clamp-2">
                     {name}
                   </span>
                 </div>

@@ -12,7 +12,7 @@ const SCENE_CAPTIONS = [
   'At the end of the match...',
   'Just share your match video URL on our app.',
   'While driving home, get Premier League-level analysis in under one hour.',
-  'Get player performance at your fingertips.',
+  'Analyse. Improve. Win, for players & teams',
 ]
 
 function clamp(value: number, min: number, max: number) {
@@ -171,7 +171,7 @@ const SectionThree = () => {
             aria-hidden="true"
           >
             <div className="mx-auto w-full max-w-4xl text-center">
-              <div className="mx-auto inline-block bg-black/70 backdrop-blur-md border border-cyan-400/60 rounded-xl px-5 py-4 sm:px-6 sm:py-5 shadow-[0_0_35px_rgba(0,240,255,0.25)]">
+              <div className="mx-auto inline-block bg-black/70 backdrop-blur-md border-2 border-cyan-400 rounded-xl px-5 py-4 sm:px-6 sm:py-5 shadow-[0_0_20px_rgba(34,211,238,0.6),0_0_40px_rgba(34,211,238,0.4),0_0_60px_rgba(34,211,238,0.2),inset_0_0_20px_rgba(34,211,238,0.1)]">
                 <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white leading-relaxed mb-3 font-bold whitespace-normal break-words">
                   {caption}
                 </p>
