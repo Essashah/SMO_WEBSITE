@@ -27,21 +27,19 @@ const SectionThree = () => {
   const [activeStep, setActiveStep] = useState(0)
 
   return (
-    <section className="relative w-full bg-black py-24 sm:py-28 lg:py-32">
+    <section className="relative w-full bg-black py-12 sm:py-20 lg:py-20">
       <div className="w-[90%] mx-auto text-center"> 
       <p className="text-sm uppercase tracking-widest text-purple-400">How our platform works</p>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Four simple steps from whistle to insights</h2>
-          <p className="mt-4 text-base text-white/70 mb-10">
+          <p className="mt-4 text-base text-white/70 mb-6 sm:mb-10">
             Every match becomes actionable intelligence. Hover or tap each step to preview what players and coaches see inside
             Scout Me Online.
           </p>
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16 lg:gap-12">
         {/* Left column: steps */}
         <div className="w-full lg:w-1/2">
-        
-
-          <div className="mt-8 space-y-4">
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-8 sm:space-y-4 sm:grid-cols-1">
             {steps.map((step, index) => {
               const isActive = index === activeStep
               return (
@@ -51,15 +49,15 @@ const SectionThree = () => {
                   onMouseEnter={() => setActiveStep(index)}
                   onFocus={() => setActiveStep(index)}
                   onClick={() => setActiveStep(index)}
-                  className={`w-full rounded-2xl border p-4 text-left transition-all duration-200 sm:p-5 ${
+                  className={`w-full rounded-2xl border p-3 text-left transition-all duration-200 sm:p-5 ${
                     isActive
                       ? 'border-purple-400/60 bg-white/10'
                       : 'border-white/10 bg-white/5 hover:border-purple-400/40 hover:bg-white/10'
                   }`}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-2 sm:gap-4">
                     <div
-                      className={`flex h-10 w-10 items-center justify-center rounded-xl text-lg font-semibold ${
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-sm font-semibold sm:h-10 sm:w-10 sm:text-lg ${
                         isActive
                           ? 'bg-purple-500 text-white shadow-[0_0_25px_rgba(168,85,247,0.4)]'
                           : 'bg-white/10 text-purple-200'
@@ -67,9 +65,9 @@ const SectionThree = () => {
                     >
                       {index + 1}
                     </div>
-                    <div>
-                      <p className="text-lg font-semibold text-white">{step.title}</p>
-                      <p className="mt-1 text-sm text-white/70">{step.description}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold text-white sm:text-lg">{step.title}</p>
+                      <p className="mt-1 text-xs text-white/70 sm:text-sm">{step.description}</p>
                     </div>
                   </div>
                 </button>
