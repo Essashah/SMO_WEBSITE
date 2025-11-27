@@ -19,7 +19,7 @@ const steps = [
   {
     title: 'Analyse. Improve. Win.',
     description: 'Turn the data into smarter coaching sessions and player growth.',
-    image: '/assets/images/scene 4.png',
+    image: '/assets/images/scene 5.png',
   },
 ]
 
@@ -28,16 +28,18 @@ const SectionThree = () => {
 
   return (
     <section className="relative w-full bg-black py-24 sm:py-28 lg:py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black pointer-events-none" />
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16">
-        {/* Left column: steps */}
-        <div className="w-full lg:w-1/2">
-          <p className="text-sm uppercase tracking-widest text-purple-400">How our platform works</p>
+      <div className="w-[90%] mx-auto text-center"> 
+      <p className="text-sm uppercase tracking-widest text-purple-400">How our platform works</p>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Four simple steps from whistle to insights</h2>
-          <p className="mt-4 text-base text-white/70">
+          <p className="mt-4 text-base text-white/70 mb-10">
             Every match becomes actionable intelligence. Hover or tap each step to preview what players and coaches see inside
             Scout Me Online.
           </p>
+      </div>
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16">
+        {/* Left column: steps */}
+        <div className="w-full lg:w-1/2">
+        
 
           <div className="mt-8 space-y-4">
             {steps.map((step, index) => {
