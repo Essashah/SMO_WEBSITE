@@ -32,7 +32,7 @@ const Hero = () => {
                 objectPosition: 'center',
               }}
             >
-              <source src="/assets/videos/mobile_view.mp4" type="video/mp4" />
+              <source src="/assets/videos/smo_mobile_2.mp4" type="video/mp4" />
             </video>
 
             {/* Desktop/Laptop video */}
@@ -50,7 +50,7 @@ const Hero = () => {
                 objectPosition: 'center',
               }}
             >
-              <source src="/assets/videos/hero.mp4" type="video/mp4" />
+              <source src="/assets/videos/smo_web_2.mp4" type="video/mp4" />
             </video>
           </>
         )}
