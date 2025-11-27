@@ -1,216 +1,103 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { gsap } from 'gsap'
+import { useState } from 'react'
 
-const VIDEO_FILES = [
-  '/assets/videos/scene 1.mp4',
-  '/assets/videos/scene 2.mp4',
-  '/assets/videos/scene 3.mp4',
-  '/assets/videos/scene 4.mp4',
-  '/assets/videos/scene 5.mp4',
+const steps = [
+  {
+    title: 'At end of match',
+    description: 'Capture the final whistle energy and head to the platform.',
+    image: '/assets/images/scene 1.png',
+  },
+  {
+    title: 'Just share your match URL',
+    description: 'Paste the streaming or upload link—no large file transfers required.',
+    image: '/assets/images/scene 2.png',
+  },
+  {
+    title: 'Get elite analysis on the ride home',
+    description: 'Receive Premier League-level insights in under an hour while you travel back.',
+    image: '/assets/images/scene 3.png',
+  },
+  {
+    title: 'Analyse. Improve. Win.',
+    description: 'Turn the data into smarter coaching sessions and player growth.',
+    image: '/assets/images/scene 4.png',
+  },
 ]
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value))
-}
-
 const SectionThree = () => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
-  const sceneThreeCaptionRef = useRef<HTMLDivElement | null>(null)
-  const [videoErrors, setVideoErrors] = useState<boolean[]>(() => Array(VIDEO_FILES.length).fill(false))
-
-  // Pre-allocate refs
-  const setVideoRef = (el: HTMLVideoElement | null, index: number) => {
-    videoRefs.current[index] = el
-  }
-
-  // Compute per-clip progress helper
-  const getClipProgress = (overallProgress: number, clipIndex: number, clips: number) => {
-    const segment = 1 / clips
-    const start = segment * clipIndex
-    const end = segment * (clipIndex + 1)
-    const local = (overallProgress - start) / (end - start)
-    return clamp(local, 0, 1)
-  }
-
-  // Attempt to autoplay when ready
-  useEffect(() => {
-    videoRefs.current.forEach((v) => {
-      if (v) {
-        v.play().catch(() => {})
-      }
-    })
-  }, [])
-
-  // Scroll-driven sequencing
-  useEffect(() => {
-    const section = sectionRef.current
-    const container = containerRef.current
-    if (!section || !container) return
-
-    const handleLoadedData = (idx: number) => {
-      const v = videoRefs.current[idx]
-      if (v) {
-        v.play().catch(() => {})
-      }
-    }
-
-    const handleError = (idx: number) => {
-      setVideoErrors((prev) => {
-        const next = [...prev]
-        next[idx] = true
-        return next
-      })
-    }
-
-    // Bind events for each video
-    videoRefs.current.forEach((v, idx) => {
-      if (!v) return
-      v.addEventListener('loadeddata', () => handleLoadedData(idx))
-      v.addEventListener('error', () => handleError(idx))
-      v.loop = true
-      v.muted = true
-      v.playsInline = true
-    })
-
-    // Scroll progress within section
-    const onScroll = () => {
-      const rect = section.getBoundingClientRect()
-      const viewportH = window.innerHeight || 1
-      const totalScrollRange = rect.height + viewportH // enter to exit while pinned-like
-      const scrolled = clamp(viewportH - rect.top, 0, totalScrollRange)
-      const progress = clamp(scrolled / totalScrollRange, 0, 1)
-
-      // Crossfade and cinematic zoom per clip (reduced zoom to avoid enlargement)
-      const clips = VIDEO_FILES.length
-      videoRefs.current.forEach((v, i) => {
-        if (!v) return
-        const p = getClipProgress(progress, i, clips)
-        // Opacity: ease in (0->1 in first 30%), hold, ease out (last 30%)
-        const fadeIn = clamp(p / 0.3, 0, 1)
-        const fadeOut = clamp((1 - p) / 0.3, 0, 1)
-        const opacity = Math.min(fadeIn, fadeOut)
-        const scale = 1 + 0.02 * Math.sin(Math.PI * clamp(p, 0, 1)) // much subtler zoom
-        const brightness = 0.9 + 0.08 * Math.sin(Math.PI * clamp(p, 0, 1))
-
-        gsap.to(v, {
-          opacity,
-          scale,
-          filter: `brightness(${brightness}) saturate(1.1)`,
-          duration: 0.25,
-          ease: 'power1.out',
-          overwrite: true,
-        })
-      })
-
-      // Scene 3 caption control (index 2)
-      const p3 = getClipProgress(progress, 2, clips)
-      const showCaption = p3 > 0.1 && p3 < 0.95
-      if (sceneThreeCaptionRef.current) {
-        gsap.to(sceneThreeCaptionRef.current, {
-          opacity: showCaption ? 1 : 0,
-          y: showCaption ? 0 : 10,
-          duration: 0.25,
-          ease: 'power1.out',
-          overwrite: true,
-        })
-      }
-    }
-
-    // Pin-like behavior: make container fixed while in view
-    const onScrollPin = () => {
-      const rect = section.getBoundingClientRect()
-      const inViewTop = rect.top <= 0
-      const inViewBottom = rect.bottom >= window.innerHeight
-      const shouldFix = inViewTop && inViewBottom
-      gsap.set(container, { position: shouldFix ? 'fixed' : 'absolute', top: shouldFix ? 0 : '0px' })
-    }
-
-    const onTick = () => {
-      onScrollPin()
-      onScroll()
-    }
-
-    let ticking = false
-    const handle = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          onTick()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    window.addEventListener('scroll', handle)
-    window.addEventListener('resize', handle)
-    handle()
-
-    return () => {
-      window.removeEventListener('scroll', handle)
-      window.removeEventListener('resize', handle)
-      gsap.killTweensOf('*')
-      videoRefs.current.forEach((v) => {
-        if (!v) return
-        // No need to remove anonymous listeners here due to closures, safe on unmount
-      })
-    }
-  }, [])
-
-  const videos = useMemo(() => VIDEO_FILES.map((src, i) => ({ src, i })), [])
+  const [activeStep, setActiveStep] = useState(0)
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-black" style={{ minHeight: '600vh' }}>
-      {/* Fixed stack container */}
-      <div ref={containerRef} className="absolute inset-0 z-0" style={{ position: 'absolute' }}>
-        {/* Soft vignette and scanlines */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.7) 100%)' }} />
-        <div className="absolute inset-0 pointer-events-none opacity-[0.04]" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,240,255,0.25) 2px, rgba(0,240,255,0.25) 4px)' }} />
+    <section className="relative w-full bg-black py-24 sm:py-28 lg:py-32">
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black pointer-events-none" />
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16">
+        {/* Left column: steps */}
+        <div className="w-full lg:w-1/2">
+          <p className="text-sm uppercase tracking-widest text-purple-400">How our platform works</p>
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Four simple steps from whistle to insights</h2>
+          <p className="mt-4 text-base text-white/70">
+            Every match becomes actionable intelligence. Hover or tap each step to preview what players and coaches see inside
+            Scout Me Online.
+          </p>
 
-        {/* Video stack */}
-        {videos.map(({ src, i }) => (
-          <video
-            key={src}
-            ref={(el) => setVideoRef(el, i)}
-            src={src}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              opacity: i === 0 ? 1 : 0,
-              transform: 'scale(1) translateZ(0)',
-              willChange: 'opacity, transform, filter',
-              filter: 'brightness(0.9) saturate(1.05)',
-            }}
-          />
-        ))}
+          <div className="mt-8 space-y-4">
+            {steps.map((step, index) => {
+              const isActive = index === activeStep
+              return (
+                <button
+                  key={step.title}
+                  type="button"
+                  onMouseEnter={() => setActiveStep(index)}
+                  onFocus={() => setActiveStep(index)}
+                  onClick={() => setActiveStep(index)}
+                  className={`w-full rounded-2xl border p-4 text-left transition-all duration-200 sm:p-5 ${
+                    isActive
+                      ? 'border-purple-400/60 bg-white/10'
+                      : 'border-white/10 bg-white/5 hover:border-purple-400/40 hover:bg-white/10'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div
+                      className={`flex h-10 w-10 items-center justify-center rounded-xl text-lg font-semibold ${
+                        isActive
+                          ? 'bg-purple-500 text-white shadow-[0_0_25px_rgba(168,85,247,0.4)]'
+                          : 'bg-white/10 text-purple-200'
+                      }`}
+                    >
+                      {index + 1}
+                    </div>
+                    <div>
+                      <p className="text-lg font-semibold text-white">{step.title}</p>
+                      <p className="mt-1 text-sm text-white/70">{step.description}</p>
+                    </div>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        </div>
 
-        {/* Scene 3 caption overlay */}
-        <div
-          ref={sceneThreeCaptionRef}
-          className="absolute left-1/2 -translate-x-1/2 bottom-20 sm:bottom-24 md:bottom-28 z-10 px-4"
-          style={{ opacity: 0 }}
-          aria-hidden="true"
-        >
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-block bg-black/70 backdrop-blur-md border border-cyan-400/60 rounded-xl px-5 py-4 sm:px-6 sm:py-5 shadow-[0_0_35px_rgba(0,240,255,0.25)]">
-              <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed">
-                <span className="block font-semibold">Right after your match,</span>
-                <span className="block">share your URL of the match video</span>
-                <span className="block mt-3 font-semibold text-cyan-400">Our AI delivers lightning-fast,</span>
-                <span className="block text-cyan-400">Premier League-level data in under 1 hour!</span>
-              </p>
+        {/* Right column: image */}
+        <div className="w-full lg:w-1/2">
+          <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-purple-900/40 via-black to-purple-900/20 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+            {steps.map((step, index) => (
+              <img
+                key={step.image}
+                src={step.image}
+                alt={step.title}
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+                  index === activeStep ? 'opacity-100' : 'opacity-0'
+                }`}
+                loading="lazy"
+              />
+            ))}
+
+            <div className="absolute bottom-4 left-4 rounded-2xl bg-black/60 px-4 py-3 text-white/80 backdrop-blur">
+              <p className="text-sm uppercase tracking-wide text-purple-300">Step {activeStep + 1}</p>
+              <p className="text-base font-semibold text-white">{steps[activeStep].title}</p>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Spacer to allow scroll; also a content area if needed later */}
-      <div className="relative z-10 w-full" style={{ height: '600vh' }} />
     </section>
   )
 }
