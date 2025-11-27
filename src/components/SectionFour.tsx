@@ -68,27 +68,17 @@ const SectionFour = () => {
                   className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
                     background:
-                      'radial-gradient(120px 120px at center, rgba(0,240,255,0.18), rgba(0,240,255,0.0))',
+                      'radial-gradient(120px 120px at center, rgba(255,16,240,0.25), rgba(255,16,240,0.0))',
                     filter: 'blur(8px)',
                   }}
                 />
 
                 {/* Card */}
                 <div
-                  className="relative aspect-square rounded-xl border bg-white/5 backdrop-blur-sm flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:translate-y-[-2px]"
-                  style={{
-                    borderColor: 'rgba(0,240,255,0.35)',
-                    boxShadow: '0 0 18px rgba(0,240,255,0.12)',
-                  }}
+                  className="relative aspect-square rounded-xl border border-cyan-400/35 bg-white/5 backdrop-blur-sm flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:translate-y-[-2px] group-hover:border-pink-500/60 group-hover:shadow-[0_0_25px_rgba(255,16,240,0.4)] shadow-[0_0_18px_rgba(0,240,255,0.12)]"
                 >
                   {/* Subtle grid pattern */}
-                  <div
-                    className="absolute inset-0 opacity-[0.05] pointer-events-none"
-                    style={{
-                      backgroundImage:
-                        'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,240,255,0.6) 2px, rgba(0,240,255,0.6) 4px)',
-                    }}
-                  />
+                 
 
                   {/* Logo image */}
                   <img
@@ -101,7 +91,7 @@ const SectionFour = () => {
 
                 {/* Label */}
                 <div className="mt-2 text-center">
-                  <span className="text-xs sm:text-sm text-white/80 group-hover:text-cyan-300 transition-colors duration-300 line-clamp-2">
+                  <span className="text-xs sm:text-sm text-white/80 group-hover:text-pink-400 transition-colors duration-300 line-clamp-2">
                     {name}
                   </span>
                 </div>
