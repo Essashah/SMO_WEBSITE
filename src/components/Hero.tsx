@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Full-screen Video Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden w-full h-full">
         {videoError ? (
           <div className="h-full w-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900" />
         ) : (
@@ -32,7 +32,7 @@ const Hero = () => {
                 objectPosition: 'center',
               }}
             >
-              <source src="/assets/videos/smo_mobile_2.mp4" type="video/mp4" />
+              <source src="/assets/videos/smo_mobile_3.mp4" type="video/mp4" />
             </video>
 
             {/* Desktop/Laptop video */}
@@ -50,12 +50,20 @@ const Hero = () => {
                 objectPosition: 'center',
               }}
             >
-              <source src="/assets/videos/smo_web_2.mp4" type="video/mp4" />
+              <source src="/assets/videos/smo_web_3.mp4" type="video/mp4" />
             </video>
           </>
         )}
       </div>
+      {/* Text Overlay */}
+      <div className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-8 md:px-12">
+        <h1 className="text-center text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          Empowering sports people to beat the odds and WIN!
+        </h1>
+      </div>
     </section>
+  )
+}
   )
 }
 
