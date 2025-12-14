@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Nasaliza';
+  src: url('/nasalization-rg.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,6 +19,15 @@
 body {
   margin: 0;
   min-height: 100vh;
+}
+
+/* Apply Nasaliza font to all headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nasaliza', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 #root {

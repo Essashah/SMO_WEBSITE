@@ -122,7 +122,7 @@ const UserJourney = () => {
             title="Player"
             accent="blue"
             imageAlt="Player"
-            imageSrc="/assets/videos/image.png"
+            imageSrc="/assets/images/AMATEUR_PLAYER.jpeg"
             bullets={[
               'Share match URL',
               'Get analysed',

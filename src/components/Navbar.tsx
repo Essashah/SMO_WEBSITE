@@ -7,9 +7,9 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
-              src="/assets/images/white-logo.png"
+              src="/assets/images/smo_logo.png"
               alt="Logo"
-              className="h-10 w-auto select-none"
+              className="h-20 w-auto select-none"
               draggable={false}
             />
           </div>
