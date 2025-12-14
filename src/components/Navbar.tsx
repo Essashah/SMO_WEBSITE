@@ -13,9 +13,19 @@ const Navbar: React.FC = () => {
               draggable={false}
             />
           </div>
-          {/* Add nav links here if needed */}
-          <div className="flex items-center gap-3">
-            <a href="#" className="text-white hover:text-gray-300">Home</a>
+          {/* Navigation Links */}
+          <div className="flex items-center gap-4 sm:gap-6">
+            <a href="#" className="text-white hover:text-gray-300 transition-colors duration-200 hidden sm:block">
+              Home
+            </a>
+            <a
+              href="http://api.scoutme.cloud:3000/auth/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 sm:px-6 font-semibold text-white hover:text-gray-300 transition-colors duration-200"
+            >
+              Login / Register
+            </a>
           </div>
         </div>
       </div>

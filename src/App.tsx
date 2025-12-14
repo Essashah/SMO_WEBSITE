@@ -7,6 +7,7 @@ import SectionThree from './components/SectionThree'
 import SectionFour from './components/SectionFour'
 import SectionFive from './components/SectionFive'
 import UserJourney from './components/userJourney'
+import Achievements from './components/Achievements'
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
       <Features />
       <SectionThree />
       <SectionFour />
-      <SectionFive />
+      {/* <SectionFive /> */}
       <UserJourney />
+      <Achievements />
       <Footer />
     </div>
   )

@@ -104,7 +104,7 @@ const Features = () => {
   }
 
   return (
-    <section className="relative w-full bg-black py-20 sm:py-24 lg:py-32 overflow-hidden">
+    <section className="relative w-full bg-gray-950 py-20 sm:py-24 lg:py-32 overflow-hidden">
       {/* Subtle background gradient */}
       <div className="absolute inset-0 pointer-events-none" 
         style={{ 

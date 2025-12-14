@@ -89,7 +89,7 @@ const Card = ({
 
 const UserJourney = () => {
   return (
-    <section id="choose-your-path" className="relative w-full bg-black py-24 sm:py-32 overflow-hidden">
+    <section id="choose-your-path" className="relative w-full bg-gray-950 py-24 sm:py-32 overflow-hidden">
       {/* Enhanced background gradients */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(60% 50% at 50% 0%, rgba(59,130,246,0.15), rgba(59,130,246,0)), radial-gradient(70% 60% at 50% 100%, rgba(147,51,234,0.18), rgba(147,51,234,0))' }} />
       
@@ -106,12 +106,11 @@ const UserJourney = () => {
         {/* Enhanced header */}
         <div className="mb-12 sm:mb-16 text-center">
           <div className="inline-block mb-4">
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-300 to-cyan-400 mb-2">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-300 to-cyan-400 ">
               Choose your path
             </h3>
-            <div className="h-1 w-24 mx-auto bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 rounded-full shadow-[0_0_20px_rgba(147,51,234,0.5)]" />
-          </div>
-          <p className="text-white/70 text-sm sm:text-base mt-4 max-w-2xl mx-auto">
+               </div>
+          <p className="text-white/70 text-base sm:text-lg max-w-2xl mx-auto">
             Discover how Scout Me Online transforms your football journey
           </p>
         </div>

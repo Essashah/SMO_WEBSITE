@@ -45,7 +45,7 @@ const SectionFour = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-black py-20 sm:py-24 lg:py-28">
+    <section ref={sectionRef} className="relative w-full bg-gray-950 py-20 sm:py-24 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12">
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-400">Trusted by clubs worldwide</h3>
