@@ -24,11 +24,11 @@ const Hero = () => {
               muted
               playsInline
               onError={handleVideoError}
-              className="block h-full w-full object-cover md:hidden"
+              className="block h-full w-full object-contain md:hidden"
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                objectFit: 'contain',
                 objectPosition: 'center',
               }}
             >
@@ -42,11 +42,11 @@ const Hero = () => {
               muted
               playsInline
               onError={handleVideoError}
-              className="hidden h-full w-full object-cover md:block"
+              className="hidden h-full w-full object-contain md:block"
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                objectFit: 'contain',
                 objectPosition: 'center',
               }}
             >
@@ -55,15 +55,8 @@ const Hero = () => {
           </>
         )}
       </div>
-      {/* Text Overlay */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-8 md:px-12">
-        <h1 className="text-center text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-          Empowering sports people to beat the odds and WIN!
-        </h1>
-      </div>
+     
     </section>
-  )
-}
   )
 }
 
