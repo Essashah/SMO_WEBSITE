@@ -21,11 +21,10 @@ const features: Feature[] = [
     title: 'Performance Analytics',
     description: 'Advanced AI-powered analysis of player performance metrics with real-time insights and comprehensive statistical breakdowns.',
     details: [
-      'Real-time match analysis',
+      'Real-time match analysis (Coming Soon)',
       'Player movement tracking',
       'Heat maps and positioning data',
-      'Performance comparison tools',
-      'Custom metric generation'
+      'Performance comparison tools'
     ],
     icon: <FaChartLine />
   },
@@ -37,8 +36,7 @@ const features: Feature[] = [
       'AI-powered player recommendations',
       'Comprehensive player profiles',
       'Statistical comparisons',
-      'Scout reports generation',
-      'Talent pipeline management'
+      'Talent pipeline management (Coming Soon)'
     ],
     icon: <FaSearch />
   },
@@ -48,10 +46,10 @@ const features: Feature[] = [
     description: 'Deep dive into team tactics and formations with advanced visualization tools and pattern recognition.',
     details: [
       'Formation analysis',
-      'Passing network visualization',
-      'Pressing triggers identification',
-      'Set-piece analysis',
-      'Opposition scouting reports'
+      'Passing and many attacking action network visualisation',
+      'Tackles and many defensive action network visualisation',
+      'Set-piece analysis'
+      
     ],
     icon: <FaFutbol />
   },
@@ -241,7 +239,7 @@ const Features = () => {
                       className="absolute inset-0"
                     >
                       <img
-                        src="/assets/images/dashboard-1.jpeg"
+                        src="/assets/images/dashboard-2.jpeg"
                         alt="Dashboard"
                         className="w-full h-full object-cover"
                       />

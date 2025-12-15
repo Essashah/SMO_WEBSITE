@@ -5,6 +5,28 @@ const SectionFour = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
 
+  // Custom name mapping for logos
+  const logoNames: Record<string, string> = {
+    // Row 1
+    '/assets/images/ACF Fiorentina u15- Italy.svg.png': 'Fiorentina U15 (Italy)',
+    '/assets/images/APEA FC-Cyprus.png': 'APEA FC (Cyprus)',
+    '/assets/images/Brescia Calcio - Femminile-Italy.png': 'Brescia Calcio Femminile (Italy)',
+    '/assets/images/CSM_Pascani.png': 'CSM Pascani (Romania)',
+    '/assets/images/FC_Dynamo_Kyiv_logo.png': 'Dynamo Kyiv (Ukraine)',
+    // Row 2
+    '/assets/images/Gulf United Fc - UAE.png': 'Gulf United FC (UAE)',
+    '/assets/images/Hashtag_Fc.png': 'Hashtag FC (England)',
+    '/assets/images/Lusitano-F.C-(Portugal).png': 'Lusitano FC (Portugal)',
+    '/assets/images/Nortwood Fc.png': 'Northwood FC (England)',
+    '/assets/images/PFC_Lokomotiv_Plovdiv_u13___u17_-Bulgaria.png': 'Lokomotiv Plovdiv U13 & U17 (Bulgaria)',
+    // Row 3
+    '/assets/images/Pfc Ludogorets Razgrad u17 -Bulgaria.png': 'Ludogorets Razgrad U17 (Bulgaria)',
+    '/assets/images/Real Madrid Femenino (ladies)-Spain.png': 'Real Madrid Femenino (Spain)',
+    '/assets/images/SG Sacavenense.png': 'SG Sacavenense (Portugal)',
+    '/assets/images/TOP OSS FC- Netherlands.png': 'TOP OSS FC (Netherlands)',
+    '/assets/images/concord_rangers.png': 'Concord Rangers FC (England)',
+  }
+
   const images = useMemo(
     () => [
       '/assets/images/ACF Fiorentina u15- Italy.svg.png',
@@ -21,6 +43,7 @@ const SectionFour = () => {
       '/assets/images/Real Madrid Femenino (ladies)-Spain.png',
       '/assets/images/SG Sacavenense.png',
       '/assets/images/TOP OSS FC- Netherlands.png',
+      '/assets/images/concord_rangers.png',
     ],
     [],
   )
@@ -56,7 +79,8 @@ const SectionFour = () => {
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8"
         >
           {images.map((src) => {
-            const name = src
+            // Use custom name if available, otherwise generate from filename
+            const name = logoNames[src] || src
               .split('/')
               .pop()
               ?.replace(/\.(png|jpg|jpeg|webp)$/i, '')

@@ -9,9 +9,9 @@ const Hero = () => {
   }
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 flex items-center justify-center">
+    <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
       {videoError ? (
-        <div className="h-full w-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900" />
+        <div className="h-full w-full bg-black" />
       ) : (
         <>
           {/* Mobile - Phone Frame */}
@@ -39,7 +39,7 @@ const Hero = () => {
           </div>
 
           {/* Desktop - Laptop Frame */}
-          <div className="hidden md:block w-full max-w-6xl mx-auto px-8">
+          <div className="hidden md:block w-full max-w-[79.2rem] mx-auto px-8">
             <div className="relative">
               {/* Laptop screen */}
               <div className="relative bg-gray-800 rounded-t-lg p-2 shadow-2xl">

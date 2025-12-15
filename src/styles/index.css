@@ -30,6 +30,14 @@ h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
 }
 
+.smofonts {
+  font-family: 'Nasaliza', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 #root {
   min-height: 100vh;
 }

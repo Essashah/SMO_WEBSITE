@@ -5,7 +5,7 @@ import HowStatement from './components/HowStatement'
 import Features from './components/Features'
 import SectionThree from './components/SectionThree'
 import SectionFour from './components/SectionFour'
-import SectionFive from './components/SectionFive'
+// import SectionFive from './components/SectionFive'
 import UserJourney from './components/userJourney'
 import Achievements from './components/Achievements'
 

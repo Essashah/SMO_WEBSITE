@@ -20,7 +20,7 @@ const achievements = [
   {
     id: 4,
     image: '/assets/images/achivements/Gemini_Generated_Image_t1js08t1js08t1js.png',
-    title: '20 players in Cyprus',
+    title: '20+ players found a club in Cyprus',
   },
 ]
 
@@ -40,7 +40,7 @@ const Achievements = () => {
     <section className="relative w-full bg-purple-950  overflow-hidden p-1">
       <div className="relative z-10 mx-auto w-[92%] max-w-7xl">
         {/* Compact Strip Container */}
-        <div className="relative h-40 sm:h-40 md:h-48 rounded-3xl overflow-hidden bg-gradient-to-r from-purple-950 to-black backdrop-blur-sm border border-white/10">
+        <div className="relative h-50 sm:h-40 md:h-48 rounded-3xl overflow-hidden bg-black backdrop-blur-sm border border-white/10">
           <div className="grid grid-cols-[1fr_auto] h-full">
             {/* Left Side - Content */}
             <div className="flex flex-col justify-center px-6 sm:px-8 md:px-12">
