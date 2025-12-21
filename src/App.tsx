@@ -1,28 +1,21 @@
-import Hero from './components/Hero'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import HowStatement from './components/HowStatement'
-import Features from './components/Features'
-import SectionThree from './components/SectionThree'
-import SectionFour from './components/SectionFour'
-// import SectionFive from './components/SectionFive'
-import UserJourney from './components/userJourney'
-import Achievements from './components/Achievements'
+import Home from './pages/Home'
+import Contact from './components/Contact'
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <HowStatement />
-      <Features />
-      <SectionThree />
-      <SectionFour />
-      {/* <SectionFive /> */}
-      <UserJourney />
-      <Achievements />
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 

@@ -9,7 +9,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
+    <section className="relative h-screen w-full overflow-hidden bg-black flex items-end justify-center pb-8">
       {videoError ? (
         <div className="h-full w-full bg-black" />
       ) : (

@@ -117,13 +117,13 @@ const Features = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-8 sm:mb-20"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white mb-1 tracking-tight">
             Powerful Features
           </h2>
-          <p className="text-xl sm:text-2xl text-white/60 max-w-2xl mx-auto font-light">
-            Everything you need to elevate your football analysis
+          <p className="text-lg sm:text-2xl text-white/60 max-w-2xl mx-auto font-light">
+            Everything you need to elevate your football analysis.
           </p>
         </motion.div>
 
@@ -135,7 +135,7 @@ const Features = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-2"
+            className="space-y-2 order-2 lg:order-1"
           >
             {features.map((feature, index) => {
               const isExpanded = expandedFeature === feature.id
@@ -220,7 +220,7 @@ const Features = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="relative lg:sticky lg:top-24"
+            className="relative lg:sticky lg:top-24 order-1 lg:order-2"
           >
             {/* Laptop Frame - Apple Style */}
             <div className="relative mx-auto max-w-2xl">

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FaAngleDoubleRight } from 'react-icons/fa'
 
 const steps = [
   {
@@ -26,6 +27,10 @@ const steps = [
 const SectionThree = () => {
   const [activeStep, setActiveStep] = useState(0)
 
+  const handleNextStep = () => {
+    setActiveStep((prev) => (prev + 1) % steps.length)
+  }
+
   return (
     <section className="relative w-full bg-black py-12 sm:py-20 lg:py-20">
       <div className="w-[90%] mx-auto text-center"> 
@@ -38,7 +43,7 @@ const SectionThree = () => {
       </div>
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16 lg:gap-12">
         {/* Left column: steps */}
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 order-2 lg:order-1">
           <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-8 sm:space-y-4 sm:grid-cols-1">
             {steps.map((step, index) => {
               const isActive = index === activeStep
@@ -77,7 +82,7 @@ const SectionThree = () => {
         </div>
 
         {/* Right column: image */}
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 order-1 lg:order-2">
           <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-purple-900/40 via-black to-purple-900/20 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
             {steps.map((step, index) => (
               <img
@@ -95,6 +100,15 @@ const SectionThree = () => {
               <p className="text-sm uppercase tracking-wide text-purple-300">Step {activeStep + 1}</p>
               <p className="text-base font-semibold text-white">{steps[activeStep].title}</p>
             </div>
+
+            {/* Mobile Next Button - Blue Double Arrows */}
+            <button
+              onClick={handleNextStep}
+              className="lg:hidden absolute bottom-4 right-4 flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 hover:bg-blue-600 active:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+              aria-label="Next step"
+            >
+              <FaAngleDoubleRight className="text-white text-xl" />
+            </button>
           </div>
         </div>
       </div>
