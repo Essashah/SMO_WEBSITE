@@ -1,10 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const Navbar: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768) // md breakpoint
+    }
+
+    const handleScroll = () => {
+      // Hero section is h-screen (100vh), so check if scrolled past that
+      const heroHeight = window.innerHeight
+      setIsScrolled(window.scrollY > heroHeight - 100) // Start transition slightly before leaving hero
+    }
+
+    checkMobile()
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', checkMobile)
+    // Check initial scroll position
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
+
+  // On mobile, always show black background. On desktop, show transparent on hero, black when scrolled
+  const shouldShowBackground = isMobile || isScrolled
+
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50">
-      <div className="mx-auto mt-4 w-[90%] ">
+    <nav 
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        shouldShowBackground 
+          ? 'bg-black/80 backdrop-blur-md shadow-lg' 
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="mx-auto mt-4 w-[90%]">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <img

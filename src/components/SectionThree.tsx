@@ -13,8 +13,8 @@ const steps = [
     image: '/assets/images/scene 2.png',
   },
   {
-    title: 'Get elite analysis on the ride home',
-    description: 'Receive Premier League-level insights in under an hour while you travel back.',
+    title: 'Target is to deliver elite analysis in an hour',
+    description: 'Receive Premier League-level insights in an hour.',
     image: '/assets/images/scene 3.png',
   },
   {
@@ -36,10 +36,7 @@ const SectionThree = () => {
       <div className="w-[90%] mx-auto text-center"> 
       <p className="text-sm uppercase tracking-widest text-purple-400">How our platform works</p>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Four simple steps from whistle to insights</h2>
-          <p className="mt-4 text-base text-white/70 mb-6 sm:mb-10">
-            Every match becomes actionable intelligence. Hover or tap each step to preview what players and coaches see inside
-            Scout Me Online.
-          </p>
+  
       </div>
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16 lg:gap-12">
         {/* Left column: steps */}
