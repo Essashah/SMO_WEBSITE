@@ -15,7 +15,7 @@ const SectionFour = () => {
     '/assets/images/FC_Dynamo_Kyiv_logo.png': 'Dynamo Kyiv (Ukraine)',
     // Row 2
     '/assets/images/Gulf United Fc - UAE.png': 'Gulf United FC (UAE)',
-    '/assets/images/Hashtag_Fc.png': 'Hashtag FC (England)',
+    '/assets/images/Hashtag_Fc.png': 'Hashtag United (England)',
     '/assets/images/PFC_Lokomotiv_Plovdiv_u13___u17_-Bulgaria.png': 'Lokomotiv Plovdiv U13 & U17 (Bulgaria)',
     // Row 3
     '/assets/images/Pfc Ludogorets Razgrad u17 -Bulgaria.png': 'Ludogorets Razgrad U17 (Bulgaria)',

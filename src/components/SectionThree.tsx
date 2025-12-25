@@ -35,7 +35,7 @@ const SectionThree = () => {
     <section className="relative w-full bg-black py-12 sm:py-20 lg:py-20">
       <div className="w-[90%] mx-auto text-center"> 
       <p className="text-sm uppercase tracking-widest text-purple-400">How our platform works</p>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">Four simple steps from whistle to insights</h2>
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl mb-6">Four simple steps from whistle to insights</h2>
   
       </div>
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:gap-16 lg:gap-12">
@@ -98,13 +98,13 @@ const SectionThree = () => {
               <p className="text-base font-semibold text-white">{steps[activeStep].title}</p>
             </div>
 
-            {/* Mobile Next Button - Blue Double Arrows */}
+            {/* Mobile Next Button - Purple Double Arrows */}
             <button
               onClick={handleNextStep}
-              className="lg:hidden absolute bottom-4 right-4 flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 hover:bg-blue-600 active:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="lg:hidden absolute top-4 right-4 flex items-center justify-center w-9 h-9 rounded-full bg-purple-500 text-white shadow-[0_0_25px_rgba(168,85,247,0.4)] hover:bg-purple-600 transition-all duration-200"
               aria-label="Next step"
             >
-              <FaAngleDoubleRight className="text-white text-xl" />
+              <FaAngleDoubleRight className="text-sm" />
             </button>
           </div>
         </div>

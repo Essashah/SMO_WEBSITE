@@ -207,8 +207,8 @@ const HowStatement = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 text-cyan-400">
                 How?
               </h2>
-              <p className="text-xl sm:text-xl md:text-2xl lg:text-3xl text-white leading-relaxed mb-3 max-w-4xl">
-              From video URL to elite analysis within <br/> <span className="bg-gradient-to-r text-transparent bg-clip-text from-pink-600 via-pink-500 to-purple-600 font-bold">one hour !</span>
+              <p className="text-xl sm:text-xl md:text-2xl lg:text-3xl text-white leading-relaxed mb-3 max-w-4xl smofonts">
+              From video URL to elite analysis within <span className="bg-gradient-to-r text-transparent bg-clip-text from-pink-600 via-pink-500 to-purple-600 font-bold">one hour !</span>
               </p>
              
             </motion.div>

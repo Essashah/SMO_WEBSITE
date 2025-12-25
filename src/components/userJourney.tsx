@@ -116,7 +116,7 @@ const UserJourney = () => {
         </div>
 
         {/* Three-column layout on md+, stacked on mobile */}
-        <div className="grid grid-cols-1 gap-8 md:gap-10 lg:gap-12 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:gap-10 lg:gap-12 md:grid-cols-3 smofonts">
           <Card
             title="Player"
             accent="blue"

@@ -129,13 +129,13 @@ const Achievements = () => {
               <p className="text-base font-semibold text-white">{achievements[activeAchievement].title}</p>
             </div> */}
 
-            {/* Mobile Next Button - Blue Double Arrows */}
+            {/* Mobile Next Button - Purple Double Arrows */}
             <button
               onClick={handleNextAchievement}
-              className="lg:hidden absolute bottom-4 right-4 flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 hover:bg-blue-600 active:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="lg:hidden absolute top-4 right-4 flex items-center justify-center w-9 h-9 rounded-full bg-purple-500 text-white shadow-[0_0_25px_rgba(168,85,247,0.4)] hover:bg-purple-600 transition-all duration-200"
               aria-label="Next achievement"
             >
-              <FaAngleDoubleRight className="text-white text-xl" />
+              <FaAngleDoubleRight className="text-sm" />
             </button>
           </div>
         </div>
