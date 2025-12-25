@@ -4,7 +4,12 @@ import { FaPlus, FaMinus } from 'react-icons/fa'
 import { 
   FaChartLine, 
   FaSearch, 
-  FaFutbol
+  FaFutbol,
+  FaTags,
+  FaMap,
+  FaCheckCircle,
+  FaTrophy,
+  FaVideo
 } from 'react-icons/fa'
 
 interface Feature {
@@ -13,89 +18,105 @@ interface Feature {
   description: string
   details: string[]
   icon: React.ReactNode
+  video?: string
+  image?: string
 }
 
 const features: Feature[] = [
+  {
+    id: 'ai-action-tagging',
+    title: 'AI Action Tagging',
+    description: 'Every action. Every location. Every outcome tagged by AI.',
+    details: [
+     
+    ],
+    icon: <FaTags />,
+    video: '/assets/videos/features/video 1.mp4'
+  },
+  {
+    id: 'intelligent-heat-map',
+    title: 'Intelligent Heat Map',
+    description: 'An Intelligent Heat Map that learns where you create the most impact.',
+    details: [
+      
+    ],
+    icon: <FaMap />,
+    video: '/assets/videos/features/video 2.mp4'
+  },
+  {
+    id: 'clarity-certainty',
+    title: 'Get clarity & certainty',
+    description: 'Instant clarity and certainty on where player or the team succeed and where they don\'t.',
+    details: [
+     
+    ],
+    icon: <FaCheckCircle />,
+    video: '/assets/videos/features/video 3.mp4'
+  },
+  {
+    id: 'intelligent-goal-post',
+    title: 'Intelligent Goal Post',
+    description: 'Intelligent goal post for shot at goal or defending your goal.',
+    details: [
+     
+    ],
+    icon: <FaFutbol />,
+    video: '/assets/videos/features/video 4.mp4'
+  },
+  {
+    id: 'line-of-graph',
+    title: 'Line of Graph',
+    description: 'Track your progress. Prove your progression.',
+    details: [
+      
+    ],
+    icon: <FaChartLine />,
+    video: '/assets/videos/features/video 5.mp4'
+  },
+  {
+    id: 'instant-rankings',
+    title: 'Instant Performance Rankings',
+    description: 'Instantly see the top performer for every metric, per team.',
+    details: [
+    
+    ],
+    icon: <FaTrophy />,
+    video: '/assets/videos/features/video 6.mp4'
+  },
+  {
+    id: 'tagged-replays',
+    title: 'Tagged Action Replays',
+    description: 'Replay every action and see exactly why it worked or didn\'t',
+    details: [
+    
+    ],
+    icon: <FaVideo />,
+    video: '/assets/videos/features/7.mp4'
+  },
   {
     id: 'performance',
     title: 'Performance Analytics',
     description: 'Advanced AI-powered analysis of player performance metrics with real-time insights and comprehensive statistical breakdowns.',
     details: [
-      'Real-time match analysis (Coming Soon)',
-      'Player movement tracking',
-      'Heat maps and positioning data',
-      'Performance comparison tools'
+     
     ],
-    icon: <FaChartLine />
+    icon: <FaChartLine />,
+    image: '/assets/images/dashboard-2.jpeg'
   },
   {
     id: 'scouting',
     title: 'Player Scouting',
     description: 'Discover and evaluate talent with precision using AI-powered recommendations and comprehensive player profiling.',
     details: [
-      'AI-powered player recommendations',
-      'Comprehensive player profiles',
-      'Statistical comparisons',
-      'Talent pipeline management (Coming Soon)'
+    
     ],
-    icon: <FaSearch />
+    icon: <FaSearch />,
+    image: '/assets/images/dashboard-2.jpeg'
   },
-  {
-    id: 'tactics',
-    title: 'Tactical Analysis',
-    description: 'Deep dive into team tactics and formations with advanced visualization tools and pattern recognition.',
-    details: [
-      'Formation analysis',
-      'Passing and many attacking action network visualisation',
-      'Tackles and many defensive action network visualisation',
-      'Set-piece analysis'
-      
-    ],
-    icon: <FaFutbol />
-  },
-//   {
-//     id: 'reports',
-//     title: 'Automated Reports',
-//     description: 'Generate professional reports in minutes with customizable templates and automated data compilation.',
-//     details: [
-//       'Match reports',
-//       'Player performance reports',
-//       'Team analysis reports',
-//       'Customizable templates',
-//       'PDF export functionality'
-//     ],
-//     icon: <FaFileAlt />
-//   },
-//   {
-//     id: 'integration',
-//     title: 'API Integration',
-//     description: 'Seamlessly integrate with your existing tools through RESTful APIs and webhook support.',
-//     details: [
-//       'RESTful API access',
-//       'Webhook support',
-//       'Data export options',
-//       'Third-party integrations',
-//       'Custom workflow automation'
-//     ],
-//     icon: <FaPlug />
-//   },
-//   {
-//     id: 'mobile',
-//     title: 'Mobile Access',
-//     description: 'Access your data anywhere, anytime with native iOS and Android apps with full feature parity.',
-//     details: [
-//       'iOS and Android apps',
-//       'Real-time notifications',
-//       'Offline mode support',
-//       'Quick action features',
-//       'Synchronized across devices'
-//     ],
-//     icon: <FaMobileAlt />
-//   }
 ]
 
 const Features = () => {
-  const [expandedFeature, setExpandedFeature] = useState<string | null>(null)
+  const [expandedFeature, setExpandedFeature] = useState<string | null>(features[0]?.id || null)
 
   const toggleFeature = (featureId: string) => {
     setExpandedFeature(expandedFeature === featureId ? null : featureId)
@@ -228,7 +249,7 @@ const Features = () => {
               <div className="relative bg-gray-800/50 rounded-t-2xl p-1.5 shadow-2xl backdrop-blur-sm">
                 {/* Screen Bezel */}
                 <div className="bg-black rounded-xl overflow-hidden aspect-video relative">
-                  {/* Screen Content - Dashboard Image */}
+                  {/* Screen Content - Video or Image */}
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={expandedFeature || 'default'}
@@ -238,11 +259,29 @@ const Features = () => {
                       transition={{ duration: 0.5, ease: 'easeInOut' }}
                       className="absolute inset-0"
                     >
-                      <img
-                        src="/assets/images/dashboard-2.jpeg"
-                        alt="Dashboard"
-                        className="w-full h-full object-cover"
-                      />
+                      {(() => {
+                        const activeFeature = features.find(f => f.id === expandedFeature) || features[0]
+                        if (activeFeature?.video) {
+                          return (
+                            <video
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-full h-full object-cover"
+                            >
+                              <source src={activeFeature.video} type="video/mp4" />
+                            </video>
+                          )
+                        }
+                        return (
+                          <img
+                            src={activeFeature?.image || '/assets/images/dashboard-2.jpeg'}
+                            alt={activeFeature?.title || 'Dashboard'}
+                            className="w-full h-full object-cover"
+                          />
+                        )
+                      })()}
                       {/* Subtle overlay for better text readability if needed */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                     </motion.div>
