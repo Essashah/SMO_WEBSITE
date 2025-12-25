@@ -24,6 +24,26 @@ interface Feature {
 
 const features: Feature[] = [
   {
+    id: 'performance',
+    title: 'Performance Analytics',
+    description: 'Advanced AI-powered analysis of player performance metrics with real-time insights and comprehensive statistical breakdowns.',
+    details: [
+     
+    ],
+    icon: <FaChartLine />,
+    image: '/assets/images/dashboard-2.jpeg'
+  },
+  {
+    id: 'scouting',
+    title: 'Player Scouting',
+    description: 'Discover and evaluate talent with precision using AI-powered recommendations and comprehensive player profiling.',
+    details: [
+    
+    ],
+    icon: <FaSearch />,
+    image: '/assets/images/dashboard-2.jpeg'
+  },
+  {
     id: 'ai-action-tagging',
     title: 'AI Action Tagging',
     description: 'Every action. Every location. Every outcome tagged by AI.',
@@ -92,27 +112,8 @@ const features: Feature[] = [
     ],
     icon: <FaVideo />,
     video: '/assets/videos/features/7.mp4'
-  },
-  {
-    id: 'performance',
-    title: 'Performance Analytics',
-    description: 'Advanced AI-powered analysis of player performance metrics with real-time insights and comprehensive statistical breakdowns.',
-    details: [
-     
-    ],
-    icon: <FaChartLine />,
-    image: '/assets/images/dashboard-2.jpeg'
-  },
-  {
-    id: 'scouting',
-    title: 'Player Scouting',
-    description: 'Discover and evaluate talent with precision using AI-powered recommendations and comprehensive player profiling.',
-    details: [
-    
-    ],
-    icon: <FaSearch />,
-    image: '/assets/images/dashboard-2.jpeg'
-  },
+  }
+  
 ]
 
 const Features = () => {
@@ -149,7 +150,7 @@ const Features = () => {
         </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[22%_78%] gap-8 lg:gap-12 items-start">
           {/* Left Side - Feature Menu (Apple Style) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -173,32 +174,32 @@ const Features = () => {
                   {/* Feature Button */}
                   <button
                     onClick={() => toggleFeature(feature.id)}
-                    className={`w-full text-left rounded-2xl p-5 transition-all duration-300 ${
+                    className={`w-full text-left rounded-xl p-3 transition-all duration-300 ${
                       isExpanded
                         ? 'bg-white/10 backdrop-blur-sm'
                         : 'bg-white/5 hover:bg-white/8'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-4 flex-1">
-                        <div className={`text-xl text-white/80 transition-colors ${
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 flex-1">
+                        <div className={`text-base text-white/80 transition-colors ${
                           isExpanded ? 'text-white' : ''
                         }`}>
                           {feature.icon}
                         </div>
-                        <h3 className="text-lg font-medium text-white">
+                        <h3 className="text-sm font-medium text-white leading-tight">
                           {feature.title}
                         </h3>
                       </div>
                       <motion.div
                         animate={{ rotate: isExpanded ? 45 : 0 }}
                         transition={{ duration: 0.3 }}
-                        className="flex-shrink-0 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center"
+                        className="flex-shrink-0 w-5 h-5 rounded-full bg-white/10 flex items-center justify-center"
                       >
                         {isExpanded ? (
-                          <FaMinus className="text-white text-xs" />
+                          <FaMinus className="text-white text-[10px]" />
                         ) : (
-                          <FaPlus className="text-white text-xs" />
+                          <FaPlus className="text-white text-[10px]" />
                         )}
                       </motion.div>
                     </div>
@@ -241,14 +242,14 @@ const Features = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="relative lg:sticky lg:top-24 order-1 lg:order-2"
+            className="relative lg:sticky lg:top-24 order-1 lg:order-2 flex items-center justify-center"
           >
             {/* Laptop Frame - Apple Style */}
-            <div className="relative mx-auto max-w-2xl">
+            <div className="relative mx-auto w-full max-w-5xl">
               {/* Laptop Screen */}
               <div className="relative bg-gray-800/50 rounded-t-2xl p-1.5 shadow-2xl backdrop-blur-sm">
                 {/* Screen Bezel */}
-                <div className="bg-black rounded-xl overflow-hidden aspect-video relative">
+                <div className="bg-black rounded-xl overflow-hidden aspect-video relative flex items-center justify-center">
                   {/* Screen Content - Video or Image */}
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -257,7 +258,7 @@ const Features = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.5, ease: 'easeInOut' }}
-                      className="absolute inset-0"
+                      className="absolute inset-0 flex items-center justify-center"
                     >
                       {(() => {
                         const activeFeature = features.find(f => f.id === expandedFeature) || features[0]
@@ -268,7 +269,7 @@ const Features = () => {
                               loop
                               muted
                               playsInline
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-contain"
                             >
                               <source src={activeFeature.video} type="video/mp4" />
                             </video>
@@ -278,7 +279,7 @@ const Features = () => {
                           <img
                             src={activeFeature?.image || '/assets/images/dashboard-2.jpeg'}
                             alt={activeFeature?.title || 'Dashboard'}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                           />
                         )
                       })()}
